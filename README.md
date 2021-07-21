@@ -17,7 +17,7 @@ ends.
 
 **Who will use it?**
 
-Anyone interested in 2D bullethell-style games will be interested in this application. There are no real limitations on
+Anyone interested in 2D Bullethell-style games will be interested in this application. There are no real limitations on
 the intended user.
 
 
@@ -27,3 +27,14 @@ I've always been interested in game design, and I saw this project as an opportu
 making a game. As for why this game in particular, I thought it offered a nice middle ground between a completely basic
 and uninspiring game (like a pong copy for example), and a game that was too complex for the given timeframe. Though,
 perhaps my scope is still too large for a summer project.
+
+
+## User Stories
+
+The following are some user stories that I plan to implement in phase 1 of the project.
+
+* As a user, I want to be able to change the visual appearance of my ship.
+* As a user, I want to be able to change the visual appearance of my bullets.
+* As a user, I want to be able to change the sound of my bullets firing.
+* As a user, I want to be able to name my ship. 
+* As a user, I want to be able to change all the above settings back to the default.
