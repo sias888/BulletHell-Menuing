@@ -1,6 +1,6 @@
-# My Personal Project
+## My Personal Project
 
-## A Bullethell Autoscroller Game
+### A Bullethell Autoscroller Game
 
 
 
@@ -28,13 +28,13 @@ making a game. As for why this game in particular, I thought it offered a nice m
 and uninspiring game (like a pong copy for example), and a game that was too complex for the given timeframe. Though,
 perhaps my scope is still too large for a summer project.
 
-
-## User Stories
+### User Stories
 
 The following are some user stories that I plan to implement in phase 1 of the project.
 
 * As a user, I want to be able to change the visual appearance of my ship.
 * As a user, I want to be able to change the visual appearance of my bullets.
-* As a user, I want to be able to change the sound of my bullets firing.
-* As a user, I want to be able to name my ship. 
+* As a user, I want to be able to change the sound of bullets firing.
+* As a user, I want to be able to name my ship.
+* As a user, I want to be able to turn background music off.
 * As a user, I want to be able to change all the above settings back to the default.
