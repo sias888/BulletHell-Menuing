@@ -1,7 +1,8 @@
 package ui;
 
 public class Main {
+    //Entry point
     public static void main(String[] args) {
-        new StartMenu();
+        StartMenu startMenu =  new StartMenu();
     }
 }

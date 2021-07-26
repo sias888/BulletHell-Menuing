@@ -5,17 +5,23 @@ import model.PlayerShip;
 
 import java.util.Scanner;
 
+// UI Functionality and methods are implemented from Teller App.
 public class OptionsMenu {
-    OptionSettings optionSettings;
+    private OptionSettings optionSettings;
     private Scanner userInput;
     private String userIn;
     private Boolean end;
 
+    //Constructor
+    //Requires: non-null optionsSettings parameter
+    //Effects: point this.optionsSettings to optionsSettings parameter. runOptionsMenu.
     public OptionsMenu(OptionSettings optionSettings) {
         this.optionSettings = optionSettings;
         runOptionsMenu();
     }
 
+    //Modifies: this, startMenu, game
+    //Effects: prompt user to select from a number of sound-related options. Save selection to optionSettings.
     private void runOptionsMenu() {
         init();
 
@@ -47,14 +53,17 @@ public class OptionsMenu {
         }
     }
 
+    //Modifies: this
+    //Effects: initialize variables used for user prompt
     private void init() {
         userInput = new Scanner(System.in);
         userIn = null;
         end = false;
     }
 
+    //Effects: prints options for user to select from.
     private void display() {
-        System.out.println("Select from: ");
+        System.out.println("\nSelect from: ");
         System.out.println("a -> Turn On Background Noise");
         System.out.println("b -> Turn Off Background Noise");
         System.out.println("c -> Turn On Bullet Noise");

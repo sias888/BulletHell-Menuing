@@ -2,17 +2,20 @@ package ui;
 
 import model.OptionSettings;
 import model.PlayerShip;
+import model.SavedPlayerShipConfigs;
 
 import java.util.Scanner;
 
+// UI Functionality and some methods are implemented from Teller App.
 public class StartMenu {
     static final String GAME_NAME = "PLACEHOLDER";
-    private Scanner userInput;
+    private Scanner scanner;
     private String userIn;
     private Boolean end;
 
-    private PlayerShip playerShip;
-    private OptionSettings optionSettings;
+    private PlayerShip playerShip = new PlayerShip();
+    private SavedPlayerShipConfigs playerShipConfigs = new SavedPlayerShipConfigs();
+    private OptionSettings optionSettings = new OptionSettings();
 
 
     //Constructor for StartMenu class. Runs runMenu() method.
@@ -28,7 +31,7 @@ public class StartMenu {
         while (!end) {
             displayMenu();
 
-            userIn = userInput.next();
+            userIn = scanner.next();
             userIn = userIn.toLowerCase();
 
             switch (userIn) {
@@ -54,19 +57,16 @@ public class StartMenu {
     // MODIFIES: This
     // EFFECTS: initializes various variables and prints welcome message.
     void init() {
-        userInput = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         userIn = null;
         end = false;
-
-        playerShip = new PlayerShip();
-        optionSettings = new OptionSettings();
 
         System.out.println("Welcome to " + GAME_NAME);
     }
 
     // EFFECTS: prints list of options for player to select from
     void displayMenu() {
-        System.out.println("Select from:");
+        System.out.println("\nSelect from:");
         System.out.println("s -> Start");
         System.out.println("m -> My Ship");
         System.out.println("o -> Options");
@@ -76,18 +76,18 @@ public class StartMenu {
     //MODIFIES: this.optionsSettings
     //EFFECTS: Allows user to modify optionsSettings through a menu
     void runOptionsMenu() {
-       new OptionsMenu(optionSettings);
+        new OptionsMenu(optionSettings);
     }
 
     //MODIFIES: this.playerShip
     //EFFECTS: Allows user to modify playerShip though a menu
     void runShipMenu() {
-        new ShipMenu(playerShip);
+        new ShipMenu(playerShip, playerShipConfigs);
     }
 
+    //MODIFIES: this, game
+    //Runs game. WIP.
     void runGame() {
         new Game(optionSettings, playerShip);
     }
-
-
 }

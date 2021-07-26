@@ -1,28 +1,43 @@
 package ui;
 
+import Exceptions.FullConfigListException;
 import Exceptions.InvalidAppearanceException;
+import Exceptions.InvalidConfigNumException;
 import model.PlayerShip;
+import model.SavedPlayerShipConfigs;
 
 import java.util.Scanner;
 
+// UI Functionality and some methods are implemented from Teller App.
 public class ShipMenu {
-    PlayerShip playerShip;
-    private Scanner userInput;
+    private PlayerShip playerShip;
+
+    private SavedPlayerShipConfigs playerShipConfigs;
+
+    private Scanner scannerInput;
     private String userIn;
     private Boolean end;
 
-    public ShipMenu(PlayerShip playerShip) {
+    //Constructor
+    //Requires: non-null playerShip and playerShipConfig parameters
+    //Effects: point this.playerShip to playerShip parameter and point this.playerShipConfig to playerShipConfig
+    // parameter, respectively. run the ship menu.
+    public ShipMenu(PlayerShip playerShip, SavedPlayerShipConfigs playerShipConfigs) {
         this.playerShip = playerShip;
+        this.playerShipConfigs = playerShipConfigs;
         runShipMenu();
     }
 
+    //Modifies: this, startMenu, game
+    //Effects: prompt user for changes to ship and bullets. save changes and send to startMenu (which will then send
+    //to game).
     void runShipMenu() {
         init();
 
         while (!end) {
             display();
 
-            userIn = userInput.next();
+            userIn = scannerInput.next();
             userIn.toLowerCase();
 
             switch (userIn) {
@@ -41,57 +56,174 @@ public class ShipMenu {
                 case "b":
                     handleBullet();
                     break;
+                case "d":
+                    playerShip.setDefault();
+                    break;
+                case "vs":
+                    handleVewConfigs();
+                    break;
+                case "s":
+                    handleSave();
+                    break;
+                case "l":
+                    handleLoad();
+                    break;
                 default:
                     System.out.println("Please enter a valid input!");
             }
         }
     }
 
+    //Modifies: this
+    //Effects: initializes some variables required for reading user input
     void init() {
-        userInput = new Scanner(System.in);
+        scannerInput = new Scanner(System.in);
         userIn = null;
         end = false;
     }
 
+    //Effects: display ship menu user options
     void display() {
-        System.out.println("Select from: ");
+        System.out.println("\nSelect from: ");
         System.out.println("v -> View Current Config");
         System.out.println("n -> Change Name");
         System.out.println("a -> Change Appearance");
         System.out.println("b -> Change Bullet Appearance");
         System.out.println("d -> Reset to Default");
+        System.out.println("vs -> View Saved Configs");
+        System.out.println("s -> Save Current Config");
+        System.out.println("l -> Load From Saved Configs");
         System.out.println("q -> Back to Start Menu");
     }
 
+    //Modifies: this, game, startMenu
+    //Effects: allows user to name playerShip
     private void handleName() {
         System.out.println("Enter desired name:");
-        userIn = userInput.next();
+        userIn = scannerInput.next();
         playerShip.setName(userIn);
     }
 
+    //Modifies: this, game, startMenu
+    //Effects: allows user to select ship appearance from a number of options and saves to playerShip
     private void handleAppearance() {
         while (true) {
             printAppearanceOptions();
-            userIn = userInput.next();
-            try {
-                playerShip.setShipAppearance(userIn);
+            System.out.println("q -> Cancel");
+            userIn = scannerInput.next();
+            if (userIn.equals("q")) {
                 break;
-            } catch (InvalidAppearanceException e) {
-                System.out.println("Please enter a valid appearance option!");
+            } else {
+                try {
+                    playerShip.setShipAppearance(userIn);
+                    break;
+                } catch (InvalidAppearanceException e) {
+                    System.out.println("Please enter a valid appearance option!");
+                }
             }
         }
     }
 
-    //WIP
+    //Effects: prints out ship appearance options
     private void printAppearanceOptions() {
-        System.out.println("Select from the following options:");
+        System.out.println("\nSelect from the following options:");
+        System.out.println("1 -> Default");
+        System.out.println("2 -> Jester");
+        System.out.println("3 -> Trident");
+        System.out.println("4 -> Scorpion");
+        System.out.println("5 -> Carrier");
+        System.out.println("6 -> Stream");
     }
 
-    //WIP: need options for appearance
+    //Modifies: this, game, startMenu
+    //Effects: allows user to change appearance of bullet from select options. Saves selection to playerShip.
     private void handleBullet() {
-        System.out.println("Enter desired bullet appearance:");
-        userIn = userInput.next();
-        playerShip.setBulletAppearance(userIn);
+        while (true) {
+            printAppearanceOptionsBullet();
+            System.out.println("q -> Cancel");
+            userIn = scannerInput.next();
+            if (userIn.equals("q")) {
+                break;
+            } else {
+                try {
+                    playerShip.setBulletAppearance(userIn);
+                    break;
+                } catch (InvalidAppearanceException e) {
+                    System.out.println("Please enter a valid appearance option!");
+                }
+            }
+        }
+
     }
 
+    //Effects: display bullet appearance options
+    private void printAppearanceOptionsBullet() {
+        System.out.println("\nSelect from the following options:");
+        System.out.println("1 -> Blue");
+        System.out.println("2 -> Violet");
+        System.out.println("3 -> Light Blue");
+        System.out.println("4 -> Green");
+        System.out.println("5 -> Yellow");
+    }
+
+    //Effect: shows player all saved PlayerShip configs from playerShipConfigs.
+    private void handleVewConfigs() {
+        playerShipConfigs.viewConfigs();
+    }
+
+    //Modifies: this, startMenu
+    //Effects: saves current playerShip as a config to playerShipConfigs. If not full, create a new config and save.
+    //Else, prompt the user as to which config to replace with current config.
+    private void handleSave() {
+        try {
+            playerShipConfigs.addConfig(playerShip);
+        } catch (FullConfigListException e) {
+            boolean end = false;
+            while (!end) {
+                System.out.println("\nYou've reached the maximum number of saves! Pick one to override.");
+                handleVewConfigs();
+                System.out.println("q -> Cancel Save");
+                userIn = scannerInput.next();
+
+                if ("q".equals(userIn)) {
+                    end = true;
+                } else {
+                    try {
+                        playerShipConfigs.overrideConfig(userIn, playerShip);
+                        end = true;
+                    } catch (InvalidConfigNumException invalidConfigNumException) {
+                        System.out.println("Please enter a valid input!");
+                    } catch (NumberFormatException numberFormatException) {
+                        System.out.println("Please enter a valid input!");
+                    }
+                }
+            }
+        }
+    }
+
+    //Modifies: this, game, startMenu
+    //Effects: allows user to set playerShip to any playerShip from playerShipConfigs.
+    private void handleLoad() {
+        while (true) {
+            System.out.println("\nSelect save to load from:");
+            handleVewConfigs();
+            System.out.println("q -> Cancel Load");
+            userIn = scannerInput.next();
+
+            if ("q".equals(userIn)) {
+                break;
+            } else {
+                try {
+                    int num = Integer.valueOf(userIn);
+                    playerShip = playerShipConfigs.getShipFromSlot(num);
+                    System.out.println("Config " + num + " has been successfully loaded!");
+                    break;
+                } catch (NumberFormatException numberFormatException) {
+                    System.out.println("Please enter a valid input!");
+                } catch (InvalidConfigNumException invalidConfigNumException) {
+                    System.out.println("Please enter a valid input!");
+                }
+            }
+        }
+    }
 }

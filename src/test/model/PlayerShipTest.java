@@ -3,7 +3,7 @@ package model;
 import Exceptions.InvalidAppearanceException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -18,17 +18,21 @@ public class PlayerShipTest {
 
     @Test
     void testConstructor() {
-        Assertions.assertEquals(playerShip.getName(),"My Ship");
-        Assertions.assertEquals(playerShip.getShipAppearance(),"Default");
-        Assertions.assertEquals(playerShip.getBulletAppearance(), "Default");
+        assertEquals(playerShip.getName(),"My Ship");
+        assertEquals(playerShip.getShipAppearanceName(),"Default");
+        assertEquals(playerShip.getBulletAppearanceName(), "Blue");
+        assertEquals(playerShip.getShipAppearance(),"src/main/Resources/Spaceship_01.png");
+        assertEquals(playerShip.getBulletAppearance(),"src/main/Resources/Player_Bullet_01.png");
     }
 
     @Test
     void testSetDefault() {
         playerShip.setDefault();
-        Assertions.assertEquals(playerShip.getName(),"My Ship");
-        Assertions.assertEquals(playerShip.getShipAppearance(),"Default");
-        Assertions.assertEquals(playerShip.getBulletAppearance(), "Default");
+        assertEquals(playerShip.getName(),"My Ship");
+        assertEquals(playerShip.getShipAppearanceName(),"Default");
+        assertEquals(playerShip.getBulletAppearanceName(), "Blue");
+        assertEquals(playerShip.getShipAppearance(),"src/main/Resources/Spaceship_01.png");
+        assertEquals(playerShip.getBulletAppearance(),"src/main/Resources/Player_Bullet_01.png");
     }
 
 
@@ -44,27 +48,123 @@ public class PlayerShipTest {
         playerShip.printConfig();
 
         expectedOut = "Name: " + playerShip.getName() +
-                "\r\nShip Appearance: " + playerShip.getShipAppearance() +
-                "\r\nBullet Appearance: " + playerShip.getBulletAppearance() + "\r\n";
+                "\r\nShip Appearance: " + playerShip.getShipAppearanceName() +
+                "\r\nBullet Appearance: " + playerShip.getBulletAppearanceName() + "\r\n";
 
-        Assertions.assertEquals(expectedOut, outContent.toString());
+        assertEquals(expectedOut, outContent.toString());
     }
 
     @Test
     void testSetName() {
         playerShip.setName("TEST NAME");
-        Assertions.assertEquals(playerShip.getName(),"TEST NAME");
+        assertEquals(playerShip.getName(),"TEST NAME");
     }
 
     @Test
-    void testSetShipAppearance() throws InvalidAppearanceException {
-        playerShip.setShipAppearance("TEST NAME");
-        Assertions.assertEquals(playerShip.getShipAppearance(),"TEST NAME");
+    void testSetShipAppearanceFail(){
+        try {
+            playerShip.setShipAppearance("f");
+            fail("I didn't expect to reach this step of execution!");
+        } catch (InvalidAppearanceException e) {
+            System.out.println("great!");
+        }
     }
 
     @Test
-    void testSetBulletAppearance() {
-        playerShip.setBulletAppearance("TEST NAME");
-        Assertions.assertEquals(playerShip.getBulletAppearance(),"TEST NAME");
+    void testSetAppearanceAll(){
+        for (Integer i = 1; i <= 6; i++) {
+
+            try {
+                playerShip.setShipAppearance(Integer.toString(i));
+                assertEquals(playerShip.getShipAppearance(), "src/main/Resources/Spaceship_0" +
+                        Integer.toString(i) + ".png");
+                switch (i) {
+                    case 1:
+                        assertEquals(playerShip.getShipAppearanceName(), "Default");
+                        break;
+                    case 2:
+                        assertEquals(playerShip.getShipAppearanceName(), "Jester");
+                        break;
+                    case 3:
+                        assertEquals(playerShip.getShipAppearanceName(), "Trident");
+                        break;
+                    case 4:
+                        assertEquals(playerShip.getShipAppearanceName(), "Scorpion");
+                        break;
+                    case 5:
+                        assertEquals(playerShip.getShipAppearanceName(), "Carrier");
+                        break;
+                    case 6:
+                        assertEquals(playerShip.getShipAppearanceName(), "Stream");
+                        break;
+                }
+            } catch (InvalidAppearanceException invalidAppearanceException) {
+                fail("I didn't expect to catch this exception!");
+            }
+        }
+    }
+
+    @Test
+    void testSetBulletAppearanceException() {
+        try {
+            playerShip.setBulletAppearance("f");
+            System.out.println("Should not print");
+            fail("I didn't expect to reach this step of execution!");
+        } catch (InvalidAppearanceException e) {
+            System.out.println("great!");
+        }
+
+    }
+
+    @Test
+    void testSetBulletAppearanceAll(){
+        for (Integer i = 1; i <= 5; i++) {
+            try {
+                playerShip.setBulletAppearance(Integer.toString(i));
+                assertEquals(playerShip.getBulletAppearance(), "src/main/Resources/Player_Bullet_0" +
+                        Integer.toString(i) + ".png");
+                switch (i) {
+                    case 1:
+                        assertEquals(playerShip.getBulletAppearanceName(), "Blue");
+                        break;
+                    case 2:
+                        assertEquals(playerShip.getBulletAppearanceName(), "Violet");
+                        break;
+                    case 3:
+                        assertEquals(playerShip.getBulletAppearanceName(), "Light Blue");
+                        break;
+                    case 4:
+                        assertEquals(playerShip.getBulletAppearanceName(), "Green");
+                        break;
+                    case 5:
+                        assertEquals(playerShip.getBulletAppearanceName(), "Yellow");
+                        break;
+                }
+            } catch (InvalidAppearanceException invalidAppearanceException) {
+                fail("I didn't expect to catch this exception!");
+            }
+        }
+    }
+
+    @Test
+    void testClone() throws InvalidAppearanceException {
+        PlayerShip playerShip2 = playerShip.clone();
+        assertEquals(playerShip.getShipAppearanceName(), "Default");
+        assertEquals(playerShip2.getShipAppearanceName(), "Default");
+        playerShip2.setShipAppearance("2");
+        assertEquals(playerShip.getShipAppearanceName(), "Default");
+        assertEquals(playerShip2.getShipAppearanceName(), "Jester");
+    }
+
+
+    @Test
+    void testIdenticalToFalse() {
+        playerShip.setName("New Name");
+        assertFalse(playerShip.identicalTo(new PlayerShip()));
+    }
+
+    @Test
+    void testIdenticalToTrue() {
+        assertTrue(playerShip.identicalTo(new PlayerShip()));
     }
 }

@@ -1,13 +1,15 @@
 package model;
 
+import Exceptions.CloneException;
 import Exceptions.InvalidAppearanceException;
 
-public class PlayerShip {
+public class PlayerShip implements Cloneable {
     private String name;
     private String shipAppearance;
+    private String shipAppearanceName;
     private String bulletAppearance;
+    private String bulletAppearanceName;
 
-    //Modifies: This
     //Effects: Constructor. Sets parameters to default values
     public PlayerShip() {
         setDefault();
@@ -17,15 +19,17 @@ public class PlayerShip {
     //Effects: Sets parameters to default values
     public void setDefault() {
         name = "My Ship";
-        shipAppearance = "Default";
-        bulletAppearance = "Default";
+        shipAppearance = "src/main/Resources/" + "Spaceship_0" + "1" + ".png";
+        shipAppearanceName = "Default";
+        bulletAppearance = "src/main/Resources/" + "Player_Bullet_0" + "1" + ".png";
+        bulletAppearanceName = "Blue";
     }
 
     //Effects: prints values of parameters
     public void printConfig() {
         System.out.println("Name: " + name);
-        System.out.println("Ship Appearance: " + shipAppearance);
-        System.out.println("Bullet Appearance: " + bulletAppearance);
+        System.out.println("Ship Appearance: " + shipAppearanceName);
+        System.out.println("Bullet Appearance: " + bulletAppearanceName);
     }
 
     //Effects: name Getter
@@ -52,16 +56,123 @@ public class PlayerShip {
     //Requires: shipAppearance is a valid appearance
     //Modifies: This
     //Effects: Appearance setter
-    //WIP: I want the String shipAppearance to throw an exception if it is not one of the valid types. How to do this?
     public void setShipAppearance(String shipAppearance) throws InvalidAppearanceException {
-        this.shipAppearance = shipAppearance;
+        if (checkValidShipAppearance(shipAppearance)) {
+            this.shipAppearance = "src/main/Resources/" + "Spaceship_0" + shipAppearance + ".png";
+            switch (shipAppearance) {
+                case "1":
+                    shipAppearanceName = "Default";
+                    break;
+                case "2":
+                    shipAppearanceName = "Jester";
+                    break;
+                case "3":
+                    shipAppearanceName = "Trident";
+                    break;
+                case "4":
+                    shipAppearanceName = "Scorpion";
+                    break;
+                case "5":
+                    shipAppearanceName = "Carrier";
+                    break;
+                case "6":
+                    shipAppearanceName = "Stream";
+                    break;
+            }
+        } else {
+            throw new InvalidAppearanceException();
+        }
+    }
+
+    //Effects: Returns true if given name is one of the valid ship assets
+    private boolean checkValidShipAppearance(String name) {
+        boolean result = false;
+
+        for (int i = 1; i <= 6; i++) {
+            if (Integer.toString(i).equals(name)) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 
     //Requires: bulletAppearance is a valid appearance
     //Modifies: This
     //Effects: Bullet appearance setter
-    //WIP: see setShipAppearance
-    public void setBulletAppearance(String bulletAppearance) {
-        this.bulletAppearance = bulletAppearance;
+    public void setBulletAppearance(String bulletAppearance) throws InvalidAppearanceException {
+        if (checkValidBulletAppearance(bulletAppearance)) {
+            this.bulletAppearance = "src/main/Resources/" + "Player_Bullet_0" + bulletAppearance + ".png";
+            switch (bulletAppearance) {
+                case "1":
+                    bulletAppearanceName = "Blue";
+                    break;
+                case "2":
+                    bulletAppearanceName = "Violet";
+                    break;
+                case "3":
+                    bulletAppearanceName = "Light Blue";
+                    break;
+                case "4":
+                    bulletAppearanceName = "Green";
+                    break;
+                case "5":
+                    bulletAppearanceName = "Yellow";
+                    break;
+            }
+        } else {
+            throw new InvalidAppearanceException();
+        }
+    }
+
+    //Effects: Returns true if given name is one of the valid bullet assets
+    private boolean checkValidBulletAppearance(String name) {
+        boolean result = false;
+
+        for (int i = 1; i <= 5; i++) {
+            if (Integer.toString(i).equals(name)) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    //Effects: returns bullet appearance name
+    public String getBulletAppearanceName() {
+        return bulletAppearanceName;
+    }
+
+    //Effects: returns ship appearance name
+    public String getShipAppearanceName() {
+        return shipAppearanceName;
+    }
+
+    //Requires: non-null playerShip Parameter
+    //Effects: return true if this and playerShip parameter have identical member values.
+    public boolean identicalTo(PlayerShip playerShip) {
+        boolean result = false;
+
+        if (name.equals(playerShip.getName()) && shipAppearance.equals(playerShip.getShipAppearance())
+                && shipAppearanceName.equals(playerShip.getShipAppearanceName())
+                && bulletAppearance.equals(playerShip.getBulletAppearance())
+                && bulletAppearanceName.equals(playerShip.getBulletAppearanceName())) {
+            result = true;
+        }
+
+        return result;
+    }
+
+    //clone method taken from https://www.edureka.co/blog/shallow-and-deep-copy-java/.
+    //Effects: returns a shallow clone of this
+    public PlayerShip clone() {
+        try {
+            return (PlayerShip) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new CloneException();
+        }
     }
 }
+
