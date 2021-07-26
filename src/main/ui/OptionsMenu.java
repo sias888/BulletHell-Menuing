@@ -1,14 +1,13 @@
 package ui;
 
 import model.OptionSettings;
-import model.PlayerShip;
 
 import java.util.Scanner;
 
 // UI Functionality and methods are implemented from Teller App.
 public class OptionsMenu {
     private OptionSettings optionSettings;
-    private Scanner userInput;
+    private Scanner scanner;
     private String userIn;
     private Boolean end;
 
@@ -28,7 +27,7 @@ public class OptionsMenu {
         while (!end) {
             display();
 
-            userIn = userInput.next();
+            userIn = scanner.next();
             userIn.toLowerCase();
 
             switch (userIn) {
@@ -41,22 +40,29 @@ public class OptionsMenu {
                 case "b":
                     optionSettings.setBackgroundSound(false);
                     break;
-                case "c":
-                    optionSettings.setBulletSound(true);
-                    break;
-                case "d":
-                    optionSettings.setBulletSound(false);
-                    break;
                 default:
-                    System.out.println("Please enter a valid input!");
+                    runOptionsMenuHelper(userIn);
             }
+        }
+    }
+
+    private void runOptionsMenuHelper(String userIn) {
+        switch (userIn) {
+            case "c":
+                optionSettings.setBulletSound(true);
+                break;
+            case "d":
+                optionSettings.setBulletSound(false);
+                break;
+            default:
+                System.out.println("Please enter a valid input!");
         }
     }
 
     //Modifies: this
     //Effects: initialize variables used for user prompt
     private void init() {
-        userInput = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         userIn = null;
         end = false;
     }

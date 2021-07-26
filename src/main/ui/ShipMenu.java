@@ -1,8 +1,9 @@
 package ui;
 
-import Exceptions.FullConfigListException;
-import Exceptions.InvalidAppearanceException;
-import Exceptions.InvalidConfigNumException;
+import exceptions.CloneException;
+import exceptions.FullConfigListException;
+import exceptions.InvalidAppearanceException;
+import exceptions.InvalidConfigNumException;
 import model.PlayerShip;
 import model.SavedPlayerShipConfigs;
 
@@ -50,27 +51,36 @@ public class ShipMenu {
                 case "n":
                     handleName();
                     break;
-                case "a":
-                    handleAppearance();
-                    break;
-                case "b":
-                    handleBullet();
-                    break;
-                case "d":
-                    playerShip.setDefault();
-                    break;
-                case "vs":
-                    handleVewConfigs();
-                    break;
-                case "s":
-                    handleSave();
-                    break;
-                case "l":
-                    handleLoad();
-                    break;
                 default:
-                    System.out.println("Please enter a valid input!");
+                    runMenuHelper(userIn);
             }
+        }
+    }
+
+    //Modifies: this, startMenu, game
+    //Effect: continues runShipMenu method.
+    private void runMenuHelper(String userIn) {
+        switch (userIn) {
+            case "a":
+                handleAppearance();
+                break;
+            case "b":
+                handleBullet();
+                break;
+            case "d":
+                playerShip.setDefault();
+                break;
+            case "vs":
+                handleVewConfigs();
+                break;
+            case "s":
+                handleSave();
+                break;
+            case "l":
+                handleLoad();
+                break;
+            default:
+                System.out.println("Please enter a valid input!");
         }
     }
 
@@ -168,7 +178,9 @@ public class ShipMenu {
 
     //Effect: shows player all saved PlayerShip configs from playerShipConfigs.
     private void handleVewConfigs() {
+        System.out.println("\nYou've reached the maximum number of saves! Pick one to override.");
         playerShipConfigs.viewConfigs();
+        System.out.println("q -> Cancel Save");
     }
 
     //Modifies: this, startMenu
@@ -177,23 +189,18 @@ public class ShipMenu {
     private void handleSave() {
         try {
             playerShipConfigs.addConfig(playerShip);
-        } catch (FullConfigListException e) {
+        } catch (FullConfigListException | CloneNotSupportedException e) {
             boolean end = false;
             while (!end) {
-                System.out.println("\nYou've reached the maximum number of saves! Pick one to override.");
                 handleVewConfigs();
-                System.out.println("q -> Cancel Save");
                 userIn = scannerInput.next();
-
                 if ("q".equals(userIn)) {
                     end = true;
                 } else {
                     try {
                         playerShipConfigs.overrideConfig(userIn, playerShip);
                         end = true;
-                    } catch (InvalidConfigNumException invalidConfigNumException) {
-                        System.out.println("Please enter a valid input!");
-                    } catch (NumberFormatException numberFormatException) {
+                    } catch (InvalidConfigNumException | NumberFormatException | CloneNotSupportedException exception) {
                         System.out.println("Please enter a valid input!");
                     }
                 }

@@ -1,7 +1,7 @@
 package model;
 
-import Exceptions.FullConfigListException;
-import Exceptions.InvalidConfigNumException;
+import exceptions.FullConfigListException;
+import exceptions.InvalidConfigNumException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +25,7 @@ class SavedPlayerShipConfigsTest {
     }
 
     @Test
-    void addConfigEmpty() {
+    void addConfigEmpty() throws CloneNotSupportedException {
         try {
             savedPlayerShipConfigs.addConfig(playerShip1);
             assertTrue(playerShip1.identicalTo(savedPlayerShipConfigs.getShipFromSlot(0)));
@@ -35,7 +35,7 @@ class SavedPlayerShipConfigsTest {
     }
 
     @Test
-    void addConfigFull() {
+    void addConfigFull() throws CloneNotSupportedException {
         for (int i = 0; i < savedPlayerShipConfigs.MAX_SLOTS; i++) {
             try {
                 savedPlayerShipConfigs.addConfig(new PlayerShip());
@@ -53,7 +53,7 @@ class SavedPlayerShipConfigsTest {
     }
 
     @Test
-    void overrideConfigFormFail() {
+    void overrideConfigFormFail() throws CloneNotSupportedException {
         for (int i = 0; i < savedPlayerShipConfigs.MAX_SLOTS; i++) {
             try {
                 savedPlayerShipConfigs.addConfig(new PlayerShip());
@@ -73,7 +73,7 @@ class SavedPlayerShipConfigsTest {
     }
 
     @Test
-    void overrideConfigNumFail() {
+    void overrideConfigNumFail() throws CloneNotSupportedException {
         for (int i = 0; i < savedPlayerShipConfigs.MAX_SLOTS - 1; i++) {
             try {
                 savedPlayerShipConfigs.addConfig(new PlayerShip());
@@ -93,7 +93,7 @@ class SavedPlayerShipConfigsTest {
     }
 
     @Test
-    void overrideConfig() {
+    void overrideConfig() throws CloneNotSupportedException {
         playerShip1.setName("Penguin");
         for (int i = 0; i < savedPlayerShipConfigs.MAX_SLOTS; i++) {
             try {
@@ -114,7 +114,7 @@ class SavedPlayerShipConfigsTest {
     }
 
     @Test
-    void viewConfigs() {
+    void viewConfigs() throws CloneNotSupportedException {
         String expectedOut = new String();
 
         for (int i = 0; i < savedPlayerShipConfigs.MAX_SLOTS - 1; i++) {

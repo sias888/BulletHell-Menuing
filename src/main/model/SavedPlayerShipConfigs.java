@@ -1,9 +1,8 @@
 package model;
 
-import Exceptions.FullConfigListException;
-import Exceptions.InvalidConfigNumException;
+import exceptions.FullConfigListException;
+import exceptions.InvalidConfigNumException;
 
-import java.nio.file.FileAlreadyExistsException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class SavedPlayerShipConfigs {
     //Modifies: this
     //Effects: saves playerShip to config with sequentially incremented num and adds to configSlots. If full, throw
     //         exception.
-    public void addConfig(PlayerShip playerShip) throws FullConfigListException {
+    public void addConfig(PlayerShip playerShip) throws FullConfigListException, CloneNotSupportedException {
         if (!isFull()) {
             configSlots.add(new ConfigSlot(configSlots.size(), playerShip.clone()));
         } else {
@@ -35,7 +34,8 @@ public class SavedPlayerShipConfigs {
     //Requires: string num
     //Modifies: this
     //Effects: converts given num to int and throws exception if bad data. Calls overrideConfig on integer num.
-    public void overrideConfig(String num, PlayerShip playerShip) throws InvalidConfigNumException {
+    public void overrideConfig(String num, PlayerShip playerShip) throws InvalidConfigNumException,
+            CloneNotSupportedException {
         int newNum = Integer.valueOf(num); //throws NumberFormatException
         overrideConfig(newNum, playerShip); //throws InvalidConfigNumException
     }
@@ -43,7 +43,8 @@ public class SavedPlayerShipConfigs {
     //Requires: integer num.
     //Modifies: this
     //Effects: Replaces playerShip of config with given num with given playerShip. Called by overrideConfig(Str, PL)
-    private void overrideConfig(Integer num, PlayerShip playerShip) throws InvalidConfigNumException {
+    private void overrideConfig(Integer num, PlayerShip playerShip) throws InvalidConfigNumException,
+            CloneNotSupportedException {
         if (num < configSlots.size()) {
             configSlots.add(num, new ConfigSlot(num, playerShip.clone()));
             removeConfig(num + 1);

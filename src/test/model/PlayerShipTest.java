@@ -1,6 +1,6 @@
 package model;
 
-import Exceptions.InvalidAppearanceException;
+import exceptions.InvalidAppearanceException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -147,7 +147,7 @@ public class PlayerShipTest {
     }
 
     @Test
-    void testClone() throws InvalidAppearanceException {
+    void testClone() throws InvalidAppearanceException, CloneNotSupportedException{
         PlayerShip playerShip2 = playerShip.clone();
         assertEquals(playerShip.getShipAppearanceName(), "Default");
         assertEquals(playerShip2.getShipAppearanceName(), "Default");

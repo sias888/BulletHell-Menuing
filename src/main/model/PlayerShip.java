@@ -1,7 +1,6 @@
 package model;
 
-import Exceptions.CloneException;
-import Exceptions.InvalidAppearanceException;
+import exceptions.InvalidAppearanceException;
 
 public class PlayerShip implements Cloneable {
     private String name;
@@ -55,7 +54,7 @@ public class PlayerShip implements Cloneable {
 
     //Requires: shipAppearance is a valid appearance
     //Modifies: This
-    //Effects: Appearance setter
+    //Effects: ShipAppearance and ShipAppearanceName setter.
     public void setShipAppearance(String shipAppearance) throws InvalidAppearanceException {
         if (checkValidShipAppearance(shipAppearance)) {
             this.shipAppearance = "src/main/Resources/" + "Spaceship_0" + shipAppearance + ".png";
@@ -69,18 +68,28 @@ public class PlayerShip implements Cloneable {
                 case "3":
                     shipAppearanceName = "Trident";
                     break;
-                case "4":
-                    shipAppearanceName = "Scorpion";
-                    break;
-                case "5":
-                    shipAppearanceName = "Carrier";
-                    break;
-                case "6":
-                    shipAppearanceName = "Stream";
-                    break;
+                default:
+                    setShipAppearanceHelper(shipAppearance);
             }
         } else {
             throw new InvalidAppearanceException();
+        }
+    }
+
+    //Requires: shipAppearance is a valid appearance
+    //Modifies: This
+    //Effects: setShipAppearance helper. Same functionality.
+    private void setShipAppearanceHelper(String shipAppearance) {
+        switch (shipAppearance) {
+            case "4":
+                shipAppearanceName = "Scorpion";
+                break;
+            case "5":
+                shipAppearanceName = "Carrier";
+                break;
+            case "6":
+                shipAppearanceName = "Stream";
+                break;
         }
     }
 
@@ -153,26 +162,18 @@ public class PlayerShip implements Cloneable {
     //Requires: non-null playerShip Parameter
     //Effects: return true if this and playerShip parameter have identical member values.
     public boolean identicalTo(PlayerShip playerShip) {
-        boolean result = false;
-
-        if (name.equals(playerShip.getName()) && shipAppearance.equals(playerShip.getShipAppearance())
+        boolean result = name.equals(playerShip.getName()) && shipAppearance.equals(playerShip.getShipAppearance())
                 && shipAppearanceName.equals(playerShip.getShipAppearanceName())
                 && bulletAppearance.equals(playerShip.getBulletAppearance())
-                && bulletAppearanceName.equals(playerShip.getBulletAppearanceName())) {
-            result = true;
-        }
+                && bulletAppearanceName.equals(playerShip.getBulletAppearanceName());
 
         return result;
     }
 
     //clone method taken from https://www.edureka.co/blog/shallow-and-deep-copy-java/.
     //Effects: returns a shallow clone of this
-    public PlayerShip clone() {
-        try {
-            return (PlayerShip) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new CloneException();
-        }
+    public PlayerShip clone() throws CloneNotSupportedException {
+        return (PlayerShip) super.clone();
     }
 }
 
