@@ -80,13 +80,15 @@ public class StartMenu {
     }
 
     //MODIFIES: this.playerShip
-    //EFFECTS: Allows user to modify playerShip though a menu
+    //EFFECTS: Allows user to modify playerShip and saved ship configs though a menu
     void runShipMenu() {
-        new ShipMenu(playerShip, playerShipConfigs);
+        ShipMenu shipMenu = new ShipMenu(playerShip, playerShipConfigs);
+        playerShipConfigs = shipMenu.getPlayerShipConfigs();
+        playerShip = shipMenu.getPlayerShip();
     }
 
     //MODIFIES: this, game
-    //Runs game. WIP.
+    //Effect: Runs game. WIP.
     void runGame() {
         new Game(optionSettings, playerShip);
     }

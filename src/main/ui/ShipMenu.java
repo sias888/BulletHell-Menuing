@@ -32,14 +32,13 @@ public class ShipMenu {
     //Modifies: this, startMenu, game
     //Effects: prompt user for changes to ship and bullets. save changes and send to startMenu (which will then send
     //to game).
-    void runShipMenu() {
+    public void runShipMenu() {
         init();
 
         while (!end) {
             display();
 
             userIn = scannerInput.next();
-            userIn.toLowerCase();
 
             switch (userIn) {
                 case "q":
@@ -50,6 +49,9 @@ public class ShipMenu {
                     break;
                 case "n":
                     handleName();
+                    break;
+                case "e":
+                    newSave();
                     break;
                 default:
                     runMenuHelper(userIn);
@@ -84,6 +86,14 @@ public class ShipMenu {
         }
     }
 
+    public PlayerShip getPlayerShip() {
+        return playerShip;
+    }
+
+    public SavedPlayerShipConfigs getPlayerShipConfigs() {
+        return playerShipConfigs;
+    }
+
     //Modifies: this
     //Effects: initializes some variables required for reading user input
     void init() {
@@ -100,9 +110,10 @@ public class ShipMenu {
         System.out.println("a -> Change Appearance");
         System.out.println("b -> Change Bullet Appearance");
         System.out.println("d -> Reset to Default");
-        System.out.println("vs -> View Saved Configs");
-        System.out.println("s -> Save Current Config");
-        System.out.println("l -> Load From Saved Configs");
+        System.out.println("vs -> View Saved Presets");
+        System.out.println("e -> Save a New Ship to an Empty Preset Slot");
+        System.out.println("s -> Save Current Config to New Preset Slot");
+        System.out.println("l -> Load Config From Saved Presets");
         System.out.println("q -> Back to Start Menu");
     }
 
@@ -178,9 +189,7 @@ public class ShipMenu {
 
     //Effect: shows player all saved PlayerShip configs from playerShipConfigs.
     private void handleVewConfigs() {
-        System.out.println("\nYou've reached the maximum number of saves! Pick one to override.");
         playerShipConfigs.viewConfigs();
-        System.out.println("q -> Cancel Save");
     }
 
     //Modifies: this, startMenu
@@ -192,7 +201,9 @@ public class ShipMenu {
         } catch (FullConfigListException | CloneNotSupportedException e) {
             boolean end = false;
             while (!end) {
+                System.out.println("\nYou've reached the maximum number of saves! Pick one to override.");
                 handleVewConfigs();
+                System.out.println("q -> Cancel Save");
                 userIn = scannerInput.next();
                 if ("q".equals(userIn)) {
                     end = true;
@@ -221,16 +232,28 @@ public class ShipMenu {
                 break;
             } else {
                 try {
-                    int num = Integer.valueOf(userIn);
+                    int num = Integer.parseInt(userIn);
                     playerShip = playerShipConfigs.getShipFromSlot(num);
                     System.out.println("Config " + num + " has been successfully loaded!");
                     break;
-                } catch (NumberFormatException numberFormatException) {
+                } catch (NumberFormatException exception) {
                     System.out.println("Please enter a valid input!");
-                } catch (InvalidConfigNumException invalidConfigNumException) {
-                    System.out.println("Please enter a valid input!");
+                } catch (InvalidConfigNumException exception) {
+                    System.out.println("Please select a non-empty slot!");
                 }
             }
+        }
+    }
+
+    private void newSave() {
+        PlayerShip newPlayerShip = new PlayerShip();
+        newPlayerShip.setName("New Ship");
+        try {
+            playerShipConfigs.addConfig(newPlayerShip);
+        } catch (FullConfigListException e) {
+            System.out.println("No empty slots!");
+        } catch (CloneNotSupportedException exception) {
+            exception.printStackTrace();
         }
     }
 }
