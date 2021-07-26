@@ -1,6 +1,6 @@
 package ui;
 
-import exceptions.CloneException;
+
 import exceptions.FullConfigListException;
 import exceptions.InvalidAppearanceException;
 import exceptions.InvalidConfigNumException;
