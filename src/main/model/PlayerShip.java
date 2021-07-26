@@ -162,10 +162,9 @@ public class PlayerShip implements Cloneable {
     //Requires: non-null playerShip Parameter
     //Effects: return true if this and playerShip parameter have identical member values.
     public boolean identicalTo(PlayerShip playerShip) {
-        return name.equals(playerShip.getName()) && shipAppearance.equals(playerShip.getShipAppearance())
-                && shipAppearanceName.equals(playerShip.getShipAppearanceName())
-                && bulletAppearance.equals(playerShip.getBulletAppearance())
-                && bulletAppearanceName.equals(playerShip.getBulletAppearanceName());
+        return name.equals(playerShip.getName())
+                && shipAppearance.equals(playerShip.getShipAppearance())
+                && bulletAppearance.equals(playerShip.getBulletAppearance());
     }
 
     //clone method taken from https://www.edureka.co/blog/shallow-and-deep-copy-java/.
