@@ -158,8 +158,28 @@ public class PlayerShipTest {
 
 
     @Test
-    void testIdenticalToFalse() {
+    void testIdenticalToFalseName() {
         playerShip.setName("New Name");
+        assertFalse(playerShip.identicalTo(new PlayerShip()));
+    }
+
+    @Test
+    void testIdenticalToFalseShip() {
+        try {
+            playerShip.setShipAppearance("2");
+        } catch (InvalidAppearanceException e) {
+            fail();
+        }
+        assertFalse(playerShip.identicalTo(new PlayerShip()));
+    }
+
+    @Test
+    void testIdenticalToFalseBullet() {
+        try {
+            playerShip.setBulletAppearance("2");
+        } catch (InvalidAppearanceException e) {
+            fail();
+        }
         assertFalse(playerShip.identicalTo(new PlayerShip()));
     }
 
