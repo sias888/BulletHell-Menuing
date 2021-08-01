@@ -1,0 +1,10 @@
+{
+  "currentShip": {
+    "shipAppearance": "src/main/resources/Spaceship_01.png",
+    "bulletAppearance": "src/main/resources/Player_Bullet_01.png",
+    "bulletAppearanceName": "Default",
+    "name": "My Ship",
+    "shipAppearanceName": "Default"
+  },
+  "savedShips": []
+}

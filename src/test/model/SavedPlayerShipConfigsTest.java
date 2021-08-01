@@ -144,4 +144,37 @@ class SavedPlayerShipConfigsTest {
             System.out.println("good!");
         }
     }
+
+    @Test
+    void testEqualsTrue() {
+        assertTrue(savedPlayerShipConfigs.equals(new SavedPlayerShipConfigs()));
+    }
+
+    @Test
+    void testEqualsTrueSame() {
+        assertTrue(savedPlayerShipConfigs.equals(savedPlayerShipConfigs));
+    }
+
+    @Test
+    void testEqualsFalseShip() throws FullConfigListException, CloneNotSupportedException {
+        playerShip1.setName("New Name");
+        savedPlayerShipConfigs.addConfig(playerShip1);
+        assertFalse(savedPlayerShipConfigs.equals(new SavedPlayerShipConfigs()));
+    }
+
+    @Test
+    void testEqualsNull() {
+        assertFalse(savedPlayerShipConfigs.equals(null));
+    }
+
+    @Test
+    void testEqualsNotShip() {
+        assertFalse(savedPlayerShipConfigs.equals(new PlayerShip()));
+    }
+
+    @Test
+    void trueHashCode() {
+        assertEquals(savedPlayerShipConfigs.hashCode(),32);
+    }
+
 }

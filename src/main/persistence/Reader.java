@@ -76,6 +76,8 @@ public class Reader {
             case "Stream":
                 ship.setShipAppearance("6");
                 break;
+            default:
+                throw new InvalidAppearanceException();
         }
     }
 
@@ -97,6 +99,8 @@ public class Reader {
             case "Yellow":
                 ship.setBulletAppearance("5");
                 break;
+            default:
+                throw new InvalidAppearanceException();
         }
     }
 

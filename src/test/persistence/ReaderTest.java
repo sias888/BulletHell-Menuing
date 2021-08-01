@@ -63,4 +63,30 @@ class ReaderTest {
             fail();
         }
     }
+
+    @Test
+    void readInvalidData() {
+        try {
+            Reader reader = new Reader("data/userDataInvalid.json");
+            reader.read();
+            fail("InvalidAppearance expected...");
+        } catch (InvalidAppearanceException e) {
+            System.out.println("good!");
+        } catch (FullConfigListException | IOException | CloneNotSupportedException e) {
+            fail("Wrong exception...");
+        }
+    }
+
+    @Test
+    void readInvalidData2() {
+        try {
+            Reader reader = new Reader("data/userDataInvalid2.json");
+            reader.read();
+            fail("InvalidAppearance expected...");
+        } catch (InvalidAppearanceException e) {
+            System.out.println("good!");
+        } catch (FullConfigListException | IOException | CloneNotSupportedException e) {
+            fail("Wrong exception...");
+        }
+    }
 }

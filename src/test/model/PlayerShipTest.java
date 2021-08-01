@@ -187,4 +187,49 @@ public class PlayerShipTest {
         assertTrue(playerShip.identicalTo(new PlayerShip()));
     }
 
+    @Test
+    void testEqualsTrue() {
+        assertTrue(playerShip.equals(new PlayerShip()));
+    }
+
+    @Test
+    void testEqualsFalseName() {
+        playerShip.setName("New Name");
+        assertFalse(playerShip.equals(new PlayerShip()));
+    }
+
+    @Test
+    void testEqualsFalseShip() {
+        try {
+            playerShip.setShipAppearance("2");
+        } catch (InvalidAppearanceException e) {
+            fail();
+        }
+        assertFalse(playerShip.equals(new PlayerShip()));
+    }
+
+    @Test
+    void testEqualsFalseBullet() {
+        try {
+            playerShip.setBulletAppearance("2");
+        } catch (InvalidAppearanceException e) {
+            fail();
+        }
+        assertFalse(playerShip.equals(new PlayerShip()));
+    }
+
+    @Test
+    void testEqualsNull() {
+        assertFalse(playerShip.equals(null));
+    }
+
+    @Test
+    void testEqualsNotShip() {
+        assertFalse(playerShip.equals(new SavedPlayerShipConfigs()));
+    }
+
+    @Test
+    void trueHashCode() {
+        assertEquals(playerShip.hashCode(),-242630004);
+    }
 }
