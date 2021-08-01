@@ -2,9 +2,11 @@ package model;
 
 import exceptions.FullConfigListException;
 import exceptions.InvalidConfigNumException;
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SavedPlayerShipConfigs {
     public static final Integer MAX_SLOTS = 5;
@@ -36,7 +38,7 @@ public class SavedPlayerShipConfigs {
     //Effects: converts given num to int and throws exception if bad data. Calls overrideConfig on integer num.
     public void overrideConfig(String num, PlayerShip playerShip) throws InvalidConfigNumException,
             CloneNotSupportedException {
-        int newNum = Integer.valueOf(num); //throws NumberFormatException
+        int newNum = Integer.parseInt(num); //throws NumberFormatException
         overrideConfig(newNum, playerShip); //throws InvalidConfigNumException
     }
 
@@ -57,20 +59,16 @@ public class SavedPlayerShipConfigs {
     public void viewConfigs() {
         for (int i = 0; i < MAX_SLOTS; i++) {
             if (i < configSlots.size()) {
-                System.out.println(Integer.toString(i) + ": " + configSlots.get(i).getPlayerShip().getName());
+                System.out.println(i + ": " + configSlots.get(i).getPlayerShip().getName());
             } else {
-                System.out.println(Integer.toString(i) + ": " + "Empty");
+                System.out.println(i + ": " + "Empty");
             }
         }
     }
 
     //Effects: return true is configSlots have reached max allowable slots
     private boolean isFull() {
-        boolean result = false;
-
-        if (configSlots.size() == MAX_SLOTS) {
-            result = true;
-        }
+        boolean result = configSlots.size() == MAX_SLOTS;
 
         return result;
     }
@@ -86,4 +84,30 @@ public class SavedPlayerShipConfigs {
         return result;
     }
 
+    public JSONArray toJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (ConfigSlot slot : configSlots) {
+            jsonArray.put(slot.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        SavedPlayerShipConfigs that = (SavedPlayerShipConfigs) o;
+        return Objects.equals(configSlots, that.configSlots);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(configSlots);
+    }
 }

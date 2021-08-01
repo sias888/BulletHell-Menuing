@@ -21,8 +21,8 @@ public class PlayerShipTest {
         assertEquals(playerShip.getName(),"My Ship");
         assertEquals(playerShip.getShipAppearanceName(),"Default");
         assertEquals(playerShip.getBulletAppearanceName(), "Blue");
-        assertEquals(playerShip.getShipAppearance(),"src/main/Resources/Spaceship_01.png");
-        assertEquals(playerShip.getBulletAppearance(),"src/main/Resources/Player_Bullet_01.png");
+        assertEquals(playerShip.getShipAppearance(),"src/main/resources/Spaceship_01.png");
+        assertEquals(playerShip.getBulletAppearance(),"src/main/resources/Player_Bullet_01.png");
     }
 
     @Test
@@ -31,8 +31,8 @@ public class PlayerShipTest {
         assertEquals(playerShip.getName(),"My Ship");
         assertEquals(playerShip.getShipAppearanceName(),"Default");
         assertEquals(playerShip.getBulletAppearanceName(), "Blue");
-        assertEquals(playerShip.getShipAppearance(),"src/main/Resources/Spaceship_01.png");
-        assertEquals(playerShip.getBulletAppearance(),"src/main/Resources/Player_Bullet_01.png");
+        assertEquals(playerShip.getShipAppearance(),"src/main/resources/Spaceship_01.png");
+        assertEquals(playerShip.getBulletAppearance(),"src/main/resources/Player_Bullet_01.png");
     }
 
 
@@ -72,12 +72,12 @@ public class PlayerShipTest {
 
     @Test
     void testSetAppearanceAll(){
-        for (Integer i = 1; i <= 6; i++) {
+        for (int i = 1; i <= 6; i++) {
 
             try {
                 playerShip.setShipAppearance(Integer.toString(i));
-                assertEquals(playerShip.getShipAppearance(), "src/main/Resources/Spaceship_0" +
-                        Integer.toString(i) + ".png");
+                assertEquals(playerShip.getShipAppearance(), "src/main/resources/Spaceship_0" +
+                        i + ".png");
                 switch (i) {
                     case 1:
                         assertEquals(playerShip.getShipAppearanceName(), "Default");
@@ -118,11 +118,11 @@ public class PlayerShipTest {
 
     @Test
     void testSetBulletAppearanceAll(){
-        for (Integer i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 5; i++) {
             try {
                 playerShip.setBulletAppearance(Integer.toString(i));
-                assertEquals(playerShip.getBulletAppearance(), "src/main/Resources/Player_Bullet_0" +
-                        Integer.toString(i) + ".png");
+                assertEquals(playerShip.getBulletAppearance(), "src/main/resources/Player_Bullet_0" +
+                        i + ".png");
                 switch (i) {
                     case 1:
                         assertEquals(playerShip.getBulletAppearanceName(), "Blue");
@@ -156,7 +156,6 @@ public class PlayerShipTest {
         assertEquals(playerShip2.getShipAppearanceName(), "Jester");
     }
 
-
     @Test
     void testIdenticalToFalseName() {
         playerShip.setName("New Name");
@@ -187,4 +186,5 @@ public class PlayerShipTest {
     void testIdenticalToTrue() {
         assertTrue(playerShip.identicalTo(new PlayerShip()));
     }
+
 }

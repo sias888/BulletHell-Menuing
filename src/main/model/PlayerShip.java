@@ -1,6 +1,9 @@
 package model;
 
 import exceptions.InvalidAppearanceException;
+import org.json.JSONObject;
+
+import java.util.Objects;
 
 public class PlayerShip implements Cloneable {
     private String name;
@@ -18,9 +21,9 @@ public class PlayerShip implements Cloneable {
     //Effects: Sets parameters to default values
     public void setDefault() {
         name = "My Ship";
-        shipAppearance = "src/main/Resources/" + "Spaceship_0" + "1" + ".png";
+        shipAppearance = "src/main/resources/" + "Spaceship_0" + "1" + ".png";
         shipAppearanceName = "Default";
-        bulletAppearance = "src/main/Resources/" + "Player_Bullet_0" + "1" + ".png";
+        bulletAppearance = "src/main/resources/" + "Player_Bullet_0" + "1" + ".png";
         bulletAppearanceName = "Blue";
     }
 
@@ -57,7 +60,7 @@ public class PlayerShip implements Cloneable {
     //Effects: ShipAppearance and ShipAppearanceName setter.
     public void setShipAppearance(String shipAppearance) throws InvalidAppearanceException {
         if (checkValidShipAppearance(shipAppearance)) {
-            this.shipAppearance = "src/main/Resources/" + "Spaceship_0" + shipAppearance + ".png";
+            this.shipAppearance = "src/main/resources/" + "Spaceship_0" + shipAppearance + ".png";
             switch (shipAppearance) {
                 case "1":
                     shipAppearanceName = "Default";
@@ -112,7 +115,7 @@ public class PlayerShip implements Cloneable {
     //Effects: Bullet appearance setter
     public void setBulletAppearance(String bulletAppearance) throws InvalidAppearanceException {
         if (checkValidBulletAppearance(bulletAppearance)) {
-            this.bulletAppearance = "src/main/Resources/" + "Player_Bullet_0" + bulletAppearance + ".png";
+            this.bulletAppearance = "src/main/resources/" + "Player_Bullet_0" + bulletAppearance + ".png";
             switch (bulletAppearance) {
                 case "1":
                     bulletAppearanceName = "Blue";
@@ -167,10 +170,40 @@ public class PlayerShip implements Cloneable {
                 && bulletAppearance.equals(playerShip.getBulletAppearance());
     }
 
+    @Override
     //clone method taken from https://www.edureka.co/blog/shallow-and-deep-copy-java/.
     //Effects: returns a shallow clone of this
     public PlayerShip clone() throws CloneNotSupportedException {
         return (PlayerShip) super.clone();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        PlayerShip that = (PlayerShip) o;
+        return Objects.equals(name, that.name) && Objects.equals(shipAppearance, that.shipAppearance) && Objects.equals(shipAppearanceName, that.shipAppearanceName) && Objects.equals(bulletAppearance, that.bulletAppearance) && Objects.equals(bulletAppearanceName, that.bulletAppearanceName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, shipAppearance, shipAppearanceName, bulletAppearance, bulletAppearanceName);
+    }
+
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("name", this.name);
+        jsonObject.put("shipAppearance", this.shipAppearance);
+        jsonObject.put("shipAppearanceName", this.shipAppearanceName);
+        jsonObject.put("bulletAppearance", this.bulletAppearance);
+        jsonObject.put("bulletAppearanceName", this.bulletAppearanceName);
+
+        return jsonObject;
     }
 }
 

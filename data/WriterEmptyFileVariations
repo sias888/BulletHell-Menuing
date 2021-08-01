@@ -1,0 +1,61 @@
+{
+    "currentShip": {
+        "shipAppearance": "src/main/resources/Spaceship_05.png",
+        "bulletAppearance": "src/main/resources/Player_Bullet_05.png",
+        "bulletAppearanceName": "Yellow",
+        "name": "Test",
+        "shipAppearanceName": "Carrier"
+    },
+    "savedShips": [
+        {
+            "playerShip": {
+                "shipAppearance": "src/main/resources/Spaceship_06.png",
+                "bulletAppearance": "src/main/resources/Player_Bullet_01.png",
+                "bulletAppearanceName": "Blue",
+                "name": "Test",
+                "shipAppearanceName": "Stream"
+            },
+            "num": "0"
+        },
+        {
+            "playerShip": {
+                "shipAppearance": "src/main/resources/Spaceship_02.png",
+                "bulletAppearance": "src/main/resources/Player_Bullet_02.png",
+                "bulletAppearanceName": "Violet",
+                "name": "Test",
+                "shipAppearanceName": "Jester"
+            },
+            "num": "1"
+        },
+        {
+            "playerShip": {
+                "shipAppearance": "src/main/resources/Spaceship_03.png",
+                "bulletAppearance": "src/main/resources/Player_Bullet_03.png",
+                "bulletAppearanceName": "Light Blue",
+                "name": "Test",
+                "shipAppearanceName": "Trident"
+            },
+            "num": "2"
+        },
+        {
+            "playerShip": {
+                "shipAppearance": "src/main/resources/Spaceship_04.png",
+                "bulletAppearance": "src/main/resources/Player_Bullet_04.png",
+                "bulletAppearanceName": "Green",
+                "name": "Test",
+                "shipAppearanceName": "Scorpion"
+            },
+            "num": "3"
+        },
+        {
+            "playerShip": {
+                "shipAppearance": "src/main/resources/Spaceship_05.png",
+                "bulletAppearance": "src/main/resources/Player_Bullet_05.png",
+                "bulletAppearanceName": "Yellow",
+                "name": "Test",
+                "shipAppearanceName": "Carrier"
+            },
+            "num": "4"
+        }
+    ]
+}

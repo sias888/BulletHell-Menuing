@@ -40,3 +40,5 @@ The following are some user stories that I plan to implement in phase 1 of the p
 * As a user, I want to be able to change all the above settings back to the default.
 * Let a defined set of ship name, ship appearance, and bullet appearance be known as a ship configuration.
   As a user, I want to be able to save multiple different ship configurations and load from saved configurations.
+* As a user, I want to be able to save my player config and list of saved configs.
+* As a user, I want to be able to load saved player configs and list of saved configs.

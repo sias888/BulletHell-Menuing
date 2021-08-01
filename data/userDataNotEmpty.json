@@ -1,0 +1,61 @@
+{
+  "currentShip": {
+    "shipAppearance": "src/main/resources/Spaceship_01.png",
+    "bulletAppearance": "src/main/resources/Player_Bullet_01.png",
+    "bulletAppearanceName": "Blue",
+    "name": "Curr",
+    "shipAppearanceName": "Default"
+  },
+  "savedShips": [
+    {
+      "playerShip": {
+        "shipAppearance": "src/main/resources/Spaceship_01.png",
+        "bulletAppearance": "src/main/resources/Player_Bullet_01.png",
+        "bulletAppearanceName": "Blue",
+        "name": "New Ship",
+        "shipAppearanceName": "Default"
+      },
+      "num": "0"
+    },
+    {
+      "playerShip": {
+        "shipAppearance": "src/main/resources/Spaceship_01.png",
+        "bulletAppearance": "src/main/resources/Player_Bullet_01.png",
+        "bulletAppearanceName": "Blue",
+        "name": "New Ship",
+        "shipAppearanceName": "Default"
+      },
+      "num": "1"
+    },
+    {
+      "playerShip": {
+        "shipAppearance": "src/main/resources/Spaceship_01.png",
+        "bulletAppearance": "src/main/resources/Player_Bullet_01.png",
+        "bulletAppearanceName": "Blue",
+        "name": "New Ship",
+        "shipAppearanceName": "Default"
+      },
+      "num": "2"
+    },
+    {
+      "playerShip": {
+        "shipAppearance": "src/main/resources/Spaceship_01.png",
+        "bulletAppearance": "src/main/resources/Player_Bullet_01.png",
+        "bulletAppearanceName": "Blue",
+        "name": "New Ship",
+        "shipAppearanceName": "Default"
+      },
+      "num": "3"
+    },
+    {
+      "playerShip": {
+        "shipAppearance": "src/main/resources/Spaceship_01.png",
+        "bulletAppearance": "src/main/resources/Player_Bullet_01.png",
+        "bulletAppearanceName": "Blue",
+        "name": "Curr",
+        "shipAppearanceName": "Default"
+      },
+      "num": "4"
+    }
+  ]
+}
