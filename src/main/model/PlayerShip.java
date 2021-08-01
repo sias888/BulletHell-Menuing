@@ -186,7 +186,10 @@ public class PlayerShip implements Cloneable {
             return false;
         }
         PlayerShip that = (PlayerShip) o;
-        return Objects.equals(name, that.name) && Objects.equals(shipAppearance, that.shipAppearance) && Objects.equals(shipAppearanceName, that.shipAppearanceName) && Objects.equals(bulletAppearance, that.bulletAppearance) && Objects.equals(bulletAppearanceName, that.bulletAppearanceName);
+        return Objects.equals(name, that.name) && Objects.equals(shipAppearance, that.shipAppearance)
+                && Objects.equals(shipAppearanceName, that.shipAppearanceName)
+                && Objects.equals(bulletAppearance, that.bulletAppearance)
+                && Objects.equals(bulletAppearanceName, that.bulletAppearanceName);
     }
 
     @Override
