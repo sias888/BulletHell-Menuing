@@ -84,6 +84,7 @@ public class SavedPlayerShipConfigs {
         return result;
     }
 
+    //Effects: returns this as a JsonArray
     public JSONArray toJson() {
         JSONArray jsonArray = new JSONArray();
 
@@ -94,6 +95,7 @@ public class SavedPlayerShipConfigs {
         return jsonArray;
     }
 
+    //Effects: overrided equals method
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -106,6 +108,7 @@ public class SavedPlayerShipConfigs {
         return Objects.equals(configSlots, that.configSlots);
     }
 
+    //Effects: overrided hashcode method
     @Override
     public int hashCode() {
         return Objects.hash(configSlots);

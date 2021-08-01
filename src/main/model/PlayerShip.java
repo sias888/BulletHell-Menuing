@@ -177,6 +177,7 @@ public class PlayerShip implements Cloneable {
         return (PlayerShip) super.clone();
     }
 
+    //Effects: overrided equals method
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -192,11 +193,13 @@ public class PlayerShip implements Cloneable {
                 && Objects.equals(bulletAppearanceName, that.bulletAppearanceName);
     }
 
+    //Effects: overrided hashcode method
     @Override
     public int hashCode() {
         return Objects.hash(name, shipAppearance, shipAppearanceName, bulletAppearance, bulletAppearanceName);
     }
 
+    //Effects: returns this as a JsonArray
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
 

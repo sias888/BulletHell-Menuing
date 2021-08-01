@@ -46,8 +46,7 @@ public class Reader {
         return new JSONObject(stringBuilder.toString());
     }
 
-    //Modifies: this
-    //Effects: sets playerShip to value of currentShip found in data. Two helper methods are used.
+    //Effects: sets ship to value of currentShip found in data. Two helper methods are used.
     private void setShip(PlayerShip ship, JSONObject json) throws InvalidAppearanceException {
         ship.setName((String) json.get("name"));
 
@@ -56,7 +55,6 @@ public class Reader {
         setShipBulletHelper(ship, json);
     }
 
-    //Modifies: this
     //Effects: sets appearance of playerShip
     private void setShipAppearanceHelper(PlayerShip ship, JSONObject json) throws InvalidAppearanceException {
         switch ((String) json.get("shipAppearanceName")) {
@@ -81,8 +79,7 @@ public class Reader {
         }
     }
 
-    //Modifies: this
-    //Effects: sets bullet appearance of playerShip
+    //Effects: sets bullet appearance of ship
     private void setShipBulletHelper(PlayerShip ship, JSONObject json) throws InvalidAppearanceException {
         switch ((String) json.get("bulletAppearanceName")) {
             case "Blue":
@@ -103,6 +100,7 @@ public class Reader {
         }
     }
 
+    //Effects: for each element in passed JsonArray, parse data into PlayerShip and add to savedPlayerShipConfigs.
     private void setShips(SavedPlayerShipConfigs savedPlayerShipConfigs, JSONArray json)
             throws InvalidAppearanceException, FullConfigListException, CloneNotSupportedException {
         for (Object o : json) {

@@ -24,6 +24,7 @@ public class ConfigSlot {
         return playerShip;
     }
 
+    //Effects: returns this as a JsonArray
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
 
@@ -33,6 +34,7 @@ public class ConfigSlot {
         return jsonObject;
     }
 
+    //Effects: overrided equals method
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -45,6 +47,7 @@ public class ConfigSlot {
         return Objects.equals(playerShip, that.playerShip) && Objects.equals(num, that.num);
     }
 
+    //Effects: overrided hashcode method
     @Override
     public int hashCode() {
         return Objects.hash(playerShip, num);
