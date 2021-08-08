@@ -21,3 +21,6 @@ the following link: https://wenrexa.itch.io/.
 * Player_Bullet_03.png
 * Player_Bullet_04.png
 * Player_Bullet_05.png
+
+Itch.io user *Deep-Fold* allowed me to use SpaceBackground.png. His itch.io site can be found in the following link:
+https://deep-fold.itch.io/.

@@ -7,6 +7,7 @@ import model.PlayerShip;
 import model.SavedPlayerShipConfigs;
 import persistence.Reader;
 import persistence.Writer;
+import ui.gui.GuiStart;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -60,7 +61,7 @@ public class StartMenu {
     private void runHelper(String userIn) {
         switch (userIn) {
             case "s":
-                this.runGame();
+                this.runGuiStart();
                 break;
             case "ss":
                 this.saveMyShip();
@@ -77,6 +78,7 @@ public class StartMenu {
                 System.out.println("Please enter a valid input!");
         }
     }
+
 
     // MODIFIES: This
     // EFFECTS: initializes various variables and prints welcome message.
@@ -108,20 +110,22 @@ public class StartMenu {
     //MODIFIES: this.playerShip
     //EFFECTS: Allows user to modify playerShip and saved ship configs though a menu
     void runShipMenu() {
+        loadMyShip();
         ShipMenu shipMenu = new ShipMenu(playerShip, playerShipConfigs);
         playerShipConfigs = shipMenu.getPlayerShipConfigs();
         playerShip = shipMenu.getPlayerShip();
+        saveMyShip();
     }
 
-    //MODIFIES: this, game
-    //Effect: Runs game. WIP.
-    void runGame() {
-        new Game(optionSettings, playerShip);
+
+    private void runGuiStart() {
+        loadMyShip();
+        GuiStart guiStart = new GuiStart(this);
     }
 
     //Modifies: userData.json
     //Effects: writes MyShip data to userData.json
-    void saveMyShip() {
+    public void saveMyShip() {
         Writer writer = new Writer("data/userData.json");
         try {
             writer.open();
@@ -134,7 +138,7 @@ public class StartMenu {
 
     //Modifies: this
     //Effects: loads data from userData.json and saves to playerShip and playerShipConfigs
-    void loadMyShip() {
+    public void loadMyShip() {
         Reader reader = new Reader("data/userData.json");
 
         try {
@@ -148,5 +152,25 @@ public class StartMenu {
         }
         playerShip = reader.getPlayerShip();
         playerShipConfigs = reader.getSavedPlayerShipConfigs();
+    }
+
+    public void setPlayerShip(PlayerShip playerShip) {
+        this.playerShip = playerShip;
+    }
+
+    public void setPlayerShipConfigs(SavedPlayerShipConfigs playerShipConfigs) {
+        this.playerShipConfigs = playerShipConfigs;
+    }
+
+    public PlayerShip getPlayerShip() {
+        return playerShip;
+    }
+
+    public SavedPlayerShipConfigs getPlayerShipConfigs() {
+        return playerShipConfigs;
+    }
+
+    public OptionSettings getOptionSettings() {
+        return optionSettings;
     }
 }
