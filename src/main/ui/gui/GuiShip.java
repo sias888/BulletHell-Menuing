@@ -16,6 +16,8 @@ public class GuiShip extends GuiFrame {
     private GuiStart guiStart;
     private JPanel currentShipPanel = new JPanel();
 
+    //Constructor
+    //Creates Jframe object and instantiates relevant parameters.
     public GuiShip(GuiStart guiStart) {
         super();
         this.guiStart = guiStart;
@@ -65,6 +67,10 @@ public class GuiShip extends GuiFrame {
         add(shipPanel);
     }
 
+
+    //GUI effect
+    //Modifies: this
+    //Effects: Creates a panel that displays information about the selected playership.
     public void seePlayerShipSelection() {
         currentShipPanel.removeAll();
 
@@ -84,12 +90,16 @@ public class GuiShip extends GuiFrame {
         setVisible(true);
     }
 
+    //Modifies: this, guiStart, startMenu
+    //Effects: sets this.playerShip to given playerShip and calls save. Updates gui with new selection afterwards.
     private void selectShip(PlayerShip playerShip) {
         this.playerShip = playerShip;
         save();
         seePlayerShipSelection();
     }
 
+    //Modifies: this
+    //Effects: extracts all ships from playerShipConfig and saves to a list of PlayerShips.
     private List<PlayerShip> getShips() {
         List<PlayerShip> playerShips = new ArrayList<>();
 
@@ -138,11 +148,15 @@ public class GuiShip extends GuiFrame {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    //Modifies: this, guiStart, startMenu
+    //Effects: calls save() before disposing shipMenu window.
     private void quit() {
         save();
         this.dispose();
     }
 
+    //Modifies: this, guiStart, startMenu
+    //Effects: saves ship and ship configs to the places in Modifies clause.
     private void save() {
         guiStart.setPlayerShip(playerShip);
         guiStart.setPlayerShipConfigs(playerShipConfigs);

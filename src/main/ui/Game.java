@@ -16,7 +16,7 @@ public class Game {
         runGame();
     }
 
-    //Does nothing at the moment--stub and implementation will be added in phase 2 and 3.
+    //Does nothing at the moment...
     private void runGame() {
     }
 }

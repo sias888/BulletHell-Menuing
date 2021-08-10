@@ -46,6 +46,8 @@ public class OptionsMenu {
         }
     }
 
+    //Modifies: this, startMenu, game
+    //Effects: prompt user to select from a number of sound-related options. Save selection to optionSettings.
     private void runOptionsMenuHelper(String userIn) {
         switch (userIn) {
             case "c":

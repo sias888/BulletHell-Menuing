@@ -15,6 +15,8 @@ public abstract class GuiFrame extends JFrame {
     }
 
 
+    //Modifies: this, children
+    //Effects: initialize frame to selected parameters. Set backgound, layout manager, title, and sizes.
     protected void initFrame() {
         ImageIcon imageIcon = new ImageIcon("src/main/resources/Spaceship_01.png");
         setIconImage(imageIcon.getImage());
@@ -25,6 +27,8 @@ public abstract class GuiFrame extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    //Modifies: this, children
+    //Effects: creates panel which displays background image.
     protected void setBackground() {
         backgroundPanel.setLayout(new GridLayout(0, 1));
         backgroundPanel.setSize(new Dimension(0, 0));

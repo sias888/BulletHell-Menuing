@@ -58,6 +58,8 @@ public class StartMenu {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: runs main menu of game. processes user input.
     private void runHelper(String userIn) {
         switch (userIn) {
             case "s":
@@ -117,7 +119,8 @@ public class StartMenu {
         saveMyShip();
     }
 
-
+    //Modifies: guiStart, this
+    //Effects: create a startGui menu for user to use.
     private void runGuiStart() {
         loadMyShip();
         GuiStart guiStart = new GuiStart(this);

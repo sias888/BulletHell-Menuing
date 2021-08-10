@@ -245,6 +245,9 @@ public class ShipMenu {
         }
     }
 
+    //Modifies: this
+    //Effects: creates a new placeholder playerShip with name parameter "New Ship" and saves to an empty slot in
+    // playerShipConfigs
     private void newSave() {
         PlayerShip newPlayerShip = new PlayerShip();
         newPlayerShip.setName("New Ship");

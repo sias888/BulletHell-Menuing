@@ -15,6 +15,8 @@ public class GuiStart extends GuiFrame {
     private StartMenu startMenu;
     private JPanel buttonPanel = new JPanel();
 
+    //Constructor
+    //Instantiates startMenu, gets ship and ship config parameters, and performs initialization functions for gui menu.
     public GuiStart(StartMenu startMenu) {
         super();
         this.startMenu = startMenu;
@@ -22,6 +24,8 @@ public class GuiStart extends GuiFrame {
         initializeStartGraphics();
     }
 
+    //modifies: this
+    //Effects: Initializes gui with desired visuals. Makes buttons.
     public void initializeStartGraphics() {
         initFrame();
         setBackground();
@@ -31,6 +35,8 @@ public class GuiStart extends GuiFrame {
     }
 
 
+    //Modifies: this, shipGui
+    //Effects: creates multiple interactive buttons which user can select from as they choose.
     private void makeButtons() {
         buttonPanel.setLayout(new GridLayout(0, 1));
         buttonPanel.setSize(new Dimension(0, 0));
@@ -64,30 +70,42 @@ public class GuiStart extends GuiFrame {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    //Modifies: this, startMenu
+    //Effects: saves ship and configs before disposing startGui window.
     private void quit() {
         saveShips();
         this.dispose();
     }
 
+    //Modifies: game
+    //Effects: runs game with this.playerShip and options settings as parameters.
     private void runGame() {
         new Game(startMenu.getOptionSettings(), playerShip);
     }
 
+    //Modifies: guiShip, this
+    //Effects: runs shipGui menu for user access.
     private void runShipGui() {
         GuiShip guiShip = new GuiShip(this);
     }
 
+    //Modifies: this, startMenu, userData
+    //Effects: saves ship and playerShipConfig to startMenu and calls startMenu's saveMyShip function to save locally.
     private void saveShips() {
         startMenu.setPlayerShip(playerShip);
         startMenu.setPlayerShipConfigs(playerShipConfigs);
         startMenu.saveMyShip();
     }
 
+    //Modifies: this
+    //Effects: gets playerShip and playerShipConfigs from startMenu
     private void loadShipsFromStart() {
         this.playerShip = startMenu.getPlayerShip();
         this.playerShipConfigs = startMenu.getPlayerShipConfigs();
     }
 
+    //Modifies: this, startMenu
+    //Effects: calls startMenu's loadMyShip() function and gets results.
     private void loadFromFile() {
         startMenu.loadMyShip();
         loadShipsFromStart();
