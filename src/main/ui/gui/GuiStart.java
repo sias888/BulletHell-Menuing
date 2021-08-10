@@ -8,6 +8,7 @@ import ui.StartMenu;
 import javax.swing.*;
 import java.awt.*;
 
+// Start-menu's counterpart in GUI form.
 public class GuiStart extends GuiFrame {
 
     private PlayerShip playerShip;

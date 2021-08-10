@@ -10,6 +10,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// GUI for allowing player to change select playerShip-related settings.
 public class GuiShip extends GuiFrame {
     private PlayerShip playerShip;
     private SavedPlayerShipConfigs playerShipConfigs;

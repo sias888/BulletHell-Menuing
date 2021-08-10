@@ -3,6 +3,7 @@ package ui.gui;
 import javax.swing.*;
 import java.awt.*;
 
+// Parent class for ala GUI menu related classes. Extends Jframe.
 public abstract class GuiFrame extends JFrame {
 
     public static final int WIDTH = 1000;
@@ -13,7 +14,6 @@ public abstract class GuiFrame extends JFrame {
 
     public GuiFrame() {
     }
-
 
     //Modifies: this, children
     //Effects: initialize frame to selected parameters. Set backgound, layout manager, title, and sizes.

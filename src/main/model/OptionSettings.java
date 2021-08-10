@@ -1,5 +1,6 @@
 package model;
 
+// Class that contains chosen parameters dealing with in-game sound options.
 public class OptionSettings {
     //true == on; false == off
     private Boolean bulletSound;

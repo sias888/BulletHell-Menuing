@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 // UI Functionality and some methods are implemented from Teller App.
+// Start menu UI class. Allows user to access various functions.
 public class StartMenu {
     static final String GAME_NAME = "PLACEHOLDER";
     private Scanner scanner;

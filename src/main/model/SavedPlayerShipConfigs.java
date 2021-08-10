@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+// Contains a list of configs and appropriate functions.
 public class SavedPlayerShipConfigs {
     public static final Integer MAX_SLOTS = 5;
     private List<ConfigSlot> configSlots;

@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
+// Object that contains a PlayerShip and a index number. Contains relevant methods.
 public class ConfigSlot {
     private PlayerShip playerShip;
     private Integer num;

@@ -10,6 +10,7 @@ import model.SavedPlayerShipConfigs;
 import java.util.Scanner;
 
 // UI Functionality and some methods are implemented from Teller App.
+// UI menu for all things ship-related.
 public class ShipMenu {
     private PlayerShip playerShip;
 

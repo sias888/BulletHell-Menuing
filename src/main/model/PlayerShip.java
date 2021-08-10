@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
+// Contains information about a given ship that can be saved and will be passed to the game.
 public class PlayerShip implements Cloneable {
     private String name;
     private String shipAppearance;

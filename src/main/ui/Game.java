@@ -3,6 +3,7 @@ package ui;
 import model.OptionSettings;
 import model.PlayerShip;
 
+//Main game function--empty at the moment
 public class Game {
     OptionSettings optionSettings;
     PlayerShip playerShip;

@@ -5,6 +5,7 @@ import model.OptionSettings;
 import java.util.Scanner;
 
 // UI Functionality and methods are implemented from Teller App.
+// Allows user to deal with sound settings
 public class OptionsMenu {
     private OptionSettings optionSettings;
     private Scanner scanner;
