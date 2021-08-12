@@ -2,7 +2,7 @@ package ui.gui;
 
 import model.PlayerShip;
 import model.SavedPlayerShipConfigs;
-import ui.Game;
+import ui.game.GameMain;
 import ui.StartMenu;
 
 import javax.swing.*;
@@ -36,9 +36,10 @@ public class GuiStart extends GuiFrame {
     }
 
 
+    @Override
     //Modifies: this, shipGui
     //Effects: creates multiple interactive buttons which user can select from as they choose.
-    private void makeButtons() {
+    void makeButtons() {
         buttonPanel.setLayout(new GridLayout(0, 1));
         buttonPanel.setSize(new Dimension(0, 0));
 
@@ -81,7 +82,7 @@ public class GuiStart extends GuiFrame {
     //Modifies: game
     //Effects: runs game with this.playerShip and options settings as parameters.
     private void runGame() {
-        new Game(startMenu.getOptionSettings(), playerShip);
+        new GameMain(startMenu.getOptionSettings(), playerShip);
     }
 
     //Modifies: guiShip, this

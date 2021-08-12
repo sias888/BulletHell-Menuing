@@ -124,7 +124,7 @@ public class StartMenu {
     //Effects: create a startGui menu for user to use.
     private void runGuiStart() {
         loadMyShip();
-        GuiStart guiStart = new GuiStart(this);
+        new GuiStart(this);
     }
 
     //Modifies: userData.json

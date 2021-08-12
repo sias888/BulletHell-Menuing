@@ -39,4 +39,6 @@ public abstract class GuiFrame extends JFrame {
         add(backgroundPanel, BorderLayout.CENTER);
     }
 
+    abstract void makeButtons();
+
 }

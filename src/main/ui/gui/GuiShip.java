@@ -119,11 +119,12 @@ public class GuiShip extends GuiFrame {
         return playerShips;
     }
 
+    @Override
     //GUI effect
     //Modifies: this
     //Effects: Displays buttons that allow user to add current ship to preset list. Will send message if list is full.
     // Also displays quit button.
-    private void makeButtons() {
+    void makeButtons() {
         Panel buttonPanel = new Panel();
         buttonPanel.setLayout(new GridLayout(0, 1));
         buttonPanel.setSize(new Dimension(0, 0));

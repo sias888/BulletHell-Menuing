@@ -13,7 +13,6 @@ import java.util.Scanner;
 // UI menu for all things ship-related.
 public class ShipMenu {
     private PlayerShip playerShip;
-
     private SavedPlayerShipConfigs playerShipConfigs;
 
     private Scanner scannerInput;

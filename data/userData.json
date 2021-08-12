@@ -1,10 +1,10 @@
 {
     "currentShip": {
-        "shipAppearance": "src/main/resources/Spaceship_02.png",
+        "shipAppearance": "src/main/resources/Spaceship_01.png",
         "bulletAppearance": "src/main/resources/Player_Bullet_01.png",
         "bulletAppearanceName": "Blue",
-        "name": "Changed",
-        "shipAppearanceName": "Jester"
+        "name": "New Ship",
+        "shipAppearanceName": "Default"
     },
     "savedShips": [
         {
@@ -52,7 +52,7 @@
                 "shipAppearance": "src/main/resources/Spaceship_01.png",
                 "bulletAppearance": "src/main/resources/Player_Bullet_01.png",
                 "bulletAppearanceName": "Blue",
-                "name": "Curr",
+                "name": "New Ship",
                 "shipAppearanceName": "Default"
             },
             "num": "4"

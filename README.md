@@ -42,3 +42,21 @@ The following are some user stories that I plan to implement in phase 1 of the p
   As a user, I want to be able to save multiple different ship configurations and load from saved configurations.
 * As a user, I want to be able to save my player config and list of saved configs.
 * As a user, I want to be able to load saved player configs and list of saved configs.
+
+### Phase 4: Task 2
+
+Implemented:
+
+Robust class in the "Model" package: PlayerShip, SavedPlayerShipConfig.
+
+Type hierarchy: GuiShip and GuiStart both extend GuiFrame.
+
+### Phase 4: Task 3
+
+I think my design has a lot of unnecessary coupling--especially with the PlayerShip and SavedPlayerShipConfig classes. 
+It's a huge mess of lines since most classes hold some association with the two classes. To remedy this, a possible 
+refactoring strategy is to create a UiMenu interface or abstract class that associates with PlayerShip and 
+SavedPlayerShipConfig, and then have the console UI classes (StartMenu, ShipMenu, OptionsMenu) implement the parent 
+class. There's also a confusing relationship between SavedPlayerShipConfig, ConfigSlot, and PlayerShip. Cleaning that up
+would again help with the messy UML. I also think that I would benefit from using an Observer pattern for all my UI
+classes. Ultimately, if I had more time, 
