@@ -59,4 +59,4 @@ refactoring strategy is to create a UiMenu interface or abstract class that asso
 SavedPlayerShipConfig, and then have the console UI classes (StartMenu, ShipMenu, OptionsMenu) implement the parent 
 class. There's also a confusing relationship between SavedPlayerShipConfig, ConfigSlot, and PlayerShip. Cleaning that up
 would again help with the messy UML. I also think that I would benefit from using an Observer pattern for all my UI
-classes. Ultimately, if I had more time, 
+classes. Ultimately, if I had more time, I would implement the above changes.
