@@ -1,8 +1,5 @@
 ## My Personal Project
 
-### A Bullethell Autoscroller Game
-
-
 
 **What will the application do?**
 
